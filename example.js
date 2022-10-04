@@ -1,5 +1,7 @@
-var foo;
-var bar = "qux";
-var baz = 3.1415;
+var bar = 42;
+console.log(global.bar);
+bar += 1;
+console.log(global.bar);
 
-console.log(foo, bar, baz);
+let foo = 86;
+console.log(global.foo);
