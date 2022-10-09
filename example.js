@@ -1,7 +1,15 @@
-var bar = 42;
-console.log(global.bar);
-bar += 1;
-console.log(global.bar);
+// var bar = 42;
+// console.log(global.bar);
+// bar += 1;
+// console.log(global.bar);
 
-let foo = 86;
-console.log(global.foo);
+// let foo = 86;
+// console.log(global.foo);
+
+//hoisting
+
+console.log(getName());
+
+function getName() {
+  return "Pete";
+}
