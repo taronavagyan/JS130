@@ -8,8 +8,19 @@
 
 //hoisting
 
-console.log(getName());
+// console.log(getName());
 
-function getName() {
-  return "Pete";
+// function getName() {
+//   return "Pete";
+// }
+
+// console.log(bar); // undefined
+// var bar = 3;
+// console.log(bar); // 3
+
+var bar = "hello";
+bar(); // raises "TypeError: bar is not a function"
+
+function bar() {
+  console.log("world");
 }
