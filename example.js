@@ -23,7 +23,7 @@
 
 // function bar() {
 //   console.log("world");
-// }
+// // }
 
-let bar;
-console.log(bar);
+// let bar;
+// console.log(bar);
