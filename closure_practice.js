@@ -94,18 +94,45 @@
 
 // 6.
 
-let runningTotal = 0;
+// let runningTotal = 0;
 
-const add = (num) => {
-  runningTotal += num;
-  console.log(runningTotal);
-};
-const subtract = (num) => {
-  runningTotal -= num;
-  console.log(runningTotal);
-};
+// const add = (num) => {
+//   runningTotal += num;
+//   console.log(runningTotal);
+// };
+// const subtract = (num) => {
+//   runningTotal -= num;
+//   console.log(runningTotal);
+// };
 
-add(1); // 1
-add(42); // 43
-subtract(39); // 4
-add(6); // 10
+// add(1); // 1
+// add(42); // 43
+// subtract(39); // 4
+// add(6); // 10
+
+// 7.
+
+// function foo(start) {
+//   let prod = start; // 24
+//   return function (factor) {
+//     prod *= factor;
+//     return prod;
+//   };
+// }
+
+// let bar = foo(2);
+// let result = bar(3);
+// result += bar(4);
+// result += bar(5);
+// console.log(result); // 150
+
+// 8.
+
+// function later(func, arg) {
+//   return function () {
+//     func(arg);
+//   };
+// }
+// const logger = (message) => console.log(message);
+// let logWarning = later(logger, "The system is shutting down!");
+// logWarning(); // The system is shutting down!
