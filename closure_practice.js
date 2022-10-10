@@ -1,3 +1,5 @@
+"use strict";
+
 // 1.
 
 // let counter = 0;
@@ -73,3 +75,37 @@
 
 // console.log(incrementCounter2()); // 1
 // console.log(incrementCounter2()); // 2
+
+// 5.
+
+// function makeMultipleLister(multiple) {
+//   return function () {
+//     let factor = 1;
+//     while (true) {
+//       if (factor * multiple >= 100) break;
+//       console.log(factor * multiple);
+//       factor += 1;
+//     }
+//   };
+// }
+
+// let lister = makeMultipleLister(17);
+// lister();
+
+// 6.
+
+let runningTotal = 0;
+
+const add = (num) => {
+  runningTotal += num;
+  console.log(runningTotal);
+};
+const subtract = (num) => {
+  runningTotal -= num;
+  console.log(runningTotal);
+};
+
+add(1); // 1
+add(42); // 43
+subtract(39); // 4
+add(6); // 10
