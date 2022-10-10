@@ -136,3 +136,34 @@
 // const logger = (message) => console.log(message);
 // let logWarning = later(logger, "The system is shutting down!");
 // logWarning(); // The system is shutting down!
+
+// 9.
+
+// function later2(func, msg) {
+//   return function (time) {
+//     func(msg, time);
+//   };
+// }
+
+// const notify = function (message, when) {
+//   console.log(`${message} in ${when} minutes!`);
+// };
+
+// let shutdownWarning = later2(notify, "The system is shutting down");
+// shutdownWarning(30); // The system is shutting down in 30 minutes!
+
+// 10.
+
+// function bind(context, func) {
+//   return function () {
+//     return func.call(context);
+//   };
+// }
+
+// let obj = {};
+// let boundFunc = bind(obj, function () {
+//   this.foo = "bar";
+// });
+
+// boundFunc();
+// console.log(obj); // { foo: 'bar' }
