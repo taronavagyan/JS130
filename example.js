@@ -18,9 +18,12 @@
 // var bar = 3;
 // console.log(bar); // 3
 
-var bar = "hello";
-bar(); // raises "TypeError: bar is not a function"
+// var bar = "hello";
+// bar(); // raises "TypeError: bar is not a function"
 
-function bar() {
-  console.log("world");
-}
+// function bar() {
+//   console.log("world");
+// }
+
+let bar;
+console.log(bar);
