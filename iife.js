@@ -47,3 +47,31 @@
 // foo(); // ?
 
 // The `foo` function is not accessible outside the scope created by the IIFE.
+
+// 6.
+
+// let bar = (function (start) {
+//   let prod = start;
+//   return function (factor) {
+//     prod *= factor;
+//     return prod;
+//   };
+// })(2);
+
+// let result = bar(3);
+
+// result += bar(4);
+// result += bar(5);
+// console.log(result);
+
+// 7.
+
+// (function countdown(num) {
+//   console.log(num);
+
+//   if (num === 1) {
+//     console.log(0);
+//   } else {
+//     countdown(num - 1);
+//   }
+// })(7);
