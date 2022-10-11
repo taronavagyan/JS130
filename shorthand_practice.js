@@ -73,3 +73,48 @@
 // let result = product(2, 3, 4, 5);
 
 // 7.
+
+// const { foo, ...rest } = { foo: 42, bar: 3.1415, qux: "abc" };
+// console.log(foo); // 42
+// console.log(rest); // { bar: 3.1415, qux: 'abc' }
+
+// 8.
+
+// const obj = {
+//   first: "I am the first",
+//   second: "I am the second",
+//   third: [1, 2, 3],
+//   rest: { a: "a", b: "b" },
+// };
+
+// let first = obj.first;
+// let second = obj.second;
+// let rest = {
+//   third: obj.third,
+//   rest: obj.rest,
+// };
+
+// console.log(rest);
+
+// 9.
+
+// function qux() {
+//   let animalType = "cat";
+//   let age = 9;
+//   let colors = ["black", "white"];
+//   return { type: animalType, age, colors };
+// }
+
+// let { type, age, colors } = qux();
+// console.log(type); // cat
+// console.log(age); // 9
+// console.log(colors); // [ 'black', 'white' ]
+
+// 10.
+
+// function objFromStrings(first, str2, str3, str4, last) {
+//   return { first, last, middle: [str2, str3, str4].sort() };
+// }
+
+// let stringsArr = ["a", "c", "b", "d", "e"];
+// let { first, last, middle } = objFromStrings(...stringsArr);
