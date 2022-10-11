@@ -28,3 +28,22 @@
 // })(numbers);
 
 // console.log(sum);
+
+// 4.
+
+// (function countdown(start) {
+//   while (start >= 0) {
+//     console.log(start);
+//     start -= 1;
+//   }
+// })(7);
+
+// 5.
+
+// (function foo() {
+//   console.log("Bar");
+// })();
+
+// foo(); // ?
+
+// The `foo` function is not accessible outside the scope created by the IIFE.
