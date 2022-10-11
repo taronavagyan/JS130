@@ -223,12 +223,51 @@
 // let list = makeList();
 // list();
 
-list("make breakfast");
+// list("make breakfast");
 
-list("read book");
+// list("read book");
 
-list();
+// list();
 
-list("make breakfast");
+// list("make breakfast");
 
-list();
+// list();
+
+// 3.
+
+// function makeList() {
+//   return {
+//     items: [],
+
+//     list: function () {
+//       console.log(this.items.reduce((msg, item) => msg + "\n" + item));
+//     },
+
+//     add: function (newItem) {
+//       this.items.push(newItem);
+//       console.log(newItem + " added!");
+//     },
+
+//     remove: function (newItem) {
+//       this.items.splice(
+//         this.items.findIndex((item) => item === newItem),
+//         1
+//       );
+//       console.log(newItem + " removed!");
+//     },
+//   };
+// }
+
+// let list = makeList();
+
+// list.add("peas");
+
+// list.list();
+
+// list.add("corn");
+
+// list.list();
+
+// list.remove("peas");
+
+// list.list();
