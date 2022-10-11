@@ -167,3 +167,28 @@
 
 // boundFunc();
 // console.log(obj); // { foo: 'bar' }
+
+//////
+
+// 1.
+
+// function makeCounterLogger(startNum) {
+//   return function (targetNum) {
+//     let count = startNum;
+//     if (targetNum > startNum) {
+//       while (count <= targetNum) {
+//         console.log(count);
+//         count += 1;
+//       }
+//     } else {
+//       while (count >= targetNum) {
+//         console.log(count);
+//         count -= 1;
+//       }
+//     }
+//   };
+// }
+
+// let countLog = makeCounterLogger(5);
+// countLog(8);
+// countLog(2);
