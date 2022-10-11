@@ -192,3 +192,43 @@
 // let countLog = makeCounterLogger(5);
 // countLog(8);
 // countLog(2);
+
+// 2.
+
+// function makeList() {
+//   let todoList = [];
+//   return function (todo) {
+//     if (!todo) {
+//       let msg =
+//         todoList.length === 0
+//           ? "List is empty."
+//           : todoList.reduce((a, b) => a + "\n" + b);
+//       console.log(msg);
+//       return;
+//     }
+
+//     if (!todoList.includes(todo)) {
+//       todoList.push(todo);
+//       console.log(todo + " added!");
+//     } else {
+//       todoList.splice(
+//         todoList.findIndex((elem) => elem === todo),
+//         1
+//       );
+//       console.log(todo + " removed!");
+//     }
+//   };
+// }
+
+// let list = makeList();
+// list();
+
+list("make breakfast");
+
+list("read book");
+
+list();
+
+list("make breakfast");
+
+list();
