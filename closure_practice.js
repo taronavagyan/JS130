@@ -271,3 +271,27 @@
 // list.remove("peas");
 
 // list.list();
+
+// 4.
+
+// function makeList() {
+//   let todoList = [];
+//   return {
+//     list: function () {
+//       console.log(todoList.reduce((msg, item) => msg + "\n" + item));
+//     },
+
+//     add: function (newItem) {
+//       todoList.push(newItem);
+//       console.log(newItem + " added!");
+//     },
+
+//     remove: function (newItem) {
+//       todoList.splice(
+//         todoList.findIndex((item) => item === newItem),
+//         1
+//       );
+//       console.log(newItem + " removed!");
+//     },
+//   };
+// }
