@@ -42,3 +42,32 @@
 // let stack = newStack();
 
 // stack.printStack();
+
+// 4.
+
+// function delegate(obj, methodName) {
+//   let partialArgs = [].slice.apply(arguments, [2]);
+
+//   return function () {
+//     obj[methodName].apply(obj, partialArgs);
+//   };
+// }
+
+// let foo = {
+//   name: "test",
+//   bar: function (greeting) {
+//     console.log(greeting + " " + this.name);
+//   },
+// };
+
+// let baz = {
+//   qux: delegate(foo, "bar", "hello"),
+// };
+
+// baz.qux(); // logs 'hello test';
+
+// foo.bar = function () {
+//   console.log("changed");
+// };
+
+// baz.qux(); // logs 'changed'
