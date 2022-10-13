@@ -18,3 +18,27 @@
 //     return func.apply(ctx, fullArgs);
 //   };
 // }
+
+// 3.
+
+// function newStack() {
+//   let stack = [];
+
+//   return {
+//     push(newItem) {
+//       stack.push(newItem);
+//     },
+
+//     pop() {
+//       return stack.pop();
+//     },
+
+//     printStack() {
+//       console.log(stack.reduce((list, item) => list + "\n" + item));
+//     },
+//   };
+// }
+
+// let stack = newStack();
+
+// stack.printStack();
