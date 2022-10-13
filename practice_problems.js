@@ -134,8 +134,6 @@
 //     })();
 //   },
 
-
-
 // };
 
 // let fooBar = Object.create(Account).init('foo@bar.com', '123456', 'foo', 'bar');
@@ -158,8 +156,141 @@
 // console.log(fooBar.firstName('abc'));           // logs 'baz' but should log foo.
 // console.log(fooBar.email('abc'));               // 'baz@qux.com' but should 'foo@bar.com'
 
+// 6.
+
+const ItemManager = {
+
+  items : [],
+
+  getSKUCode(name, category) {
+    let identifier = "";
+
+    for (let char of name) {
+      if (identifier.length === 3) break;
+      if (char !== " ") identifier += (char);
+    }
+
+    return (identifier + category[0] + category[1]).toUpperCase();
+  },
+
+  isInvalid(item) {
+    let name = item.name.replace(/ /g, "");
+    return (name.length < 5 || item.category.length < 5 || item.category.includes(" ") || !Number.isInteger(item.quantity));
+  },
+
+  create(name, category, quantity) {
+    let item = {
+      name, category, quantity,
+      SKUCode : this.getSKUCode(name, category) 
+    }
+
+    if (this.isInvalid(item)) return { notValid: true };
+    this.items.push(item);
+  },
+
+  update(identifier, sourceObj) {
+    let target = this.findViaSKU(identifier);
+    target = Object.assign(target, sourceObj);
+  },
+
+  delete(identifier) {
+    let targetIndex = this.items.findIndex(item => item.SKUCode === identifier);
+    this.items.splice(targetIndex, 1);
+  },
+
+  findViaSKU(identifier) {
+    return this.items.find(item => item.SKUCode === identifier);
+  },
+
+  inStock() {
+    this.items.forEach(item => {
+      if (item.quantity > 0) console.log(item);
+    });
+  },
+
+  itemsInCategory(category) {
+    this.items.forEach(item => {
+      if (item.category === category) console.log(item);
+    });
+  },
+};
+
+const ReportManager = {
+
+  init(itemManager) {
+    this.items = itemManager;
+  },
+
+  reportInStock() {
+    this.items.inStock();
+  },
+
+  createReporter(identifier) {
+    let item = this.items.findViaSKU(identifier);
+
+    return {
+      itemInfo() {
+        Object.keys(item).forEach((prop) => {
+          console.log(`${prop}: ${item[prop]}`)
+        });
+        console.log("");
+      }
+    }
+  }
+};
+
+ItemManager.create('basket ball', 'sports', 0);           // valid item
+ItemManager.create('asd', 'sports', 0);
+ItemManager.create('soccer ball', 'sports', 5);           // valid item
+ItemManager.create('football', 'sports');
+ItemManager.create('football', 'sports', 3);              // valid item
+ItemManager.create('kitchen pot', 'cooking items', 0);
+ItemManager.create('kitchen pot', 'cooking', 3);          // valid item
+// returns list with the 4 valid items
+// console.log(ItemManager.items);
+// console.log("---------------");
+ReportManager.init(ItemManager);
+// logs soccer ball,football,kitchen pot
+// ReportManager.reportInStock();
+// console.log("---------------");
 
 
+ItemManager.update('SOCSP', { quantity: 0 });
+// returns list with the item objects for football and kitchen pot
+// ItemManager.inStock();
+// console.log("---------------");
+// football,kitchen pot
+// ReportManager.reportInStock();
+// console.log("---------------");
+
+
+// returns list with the item objects for basket ball, soccer ball, and football
+// ItemManager.itemsInCategory('sports');
+// console.log("---------------");
+
+// ItemManager.delete('SOCSP');
+// returns list the remaining 3 valid items (soccer ball is removed from the list)
+// console.log(ItemManager.items);
+// console.log("---------------");
+
+let kitchenPotReporter = ReportManager.createReporter('KITCO');
+kitchenPotReporter.itemInfo();
+// logs
+// skuCode: KITCO
+// itemName: kitchen pot
+// category: cooking
+// quantity: 3
+
+ItemManager.update('KITCO', { quantity: 10 });
+kitchenPotReporter.itemInfo();
+
+// logs
+// skuCode: KITCO
+// itemName: kitchen pot
+// category: cooking
+// quantity: 10
+
+/////////////////////////
 
 //// Miscellaneous ////
 
