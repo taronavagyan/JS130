@@ -101,7 +101,7 @@ describe("TodoList", () => {
 [ ] Clean room
 [ ] Go to the gym`;
   
-    expect(list.toString()).toBe(string);
+    expect(list.toString()).toEqual(string);
   });
 
   test("toString() returns string representation of the list", () => {
