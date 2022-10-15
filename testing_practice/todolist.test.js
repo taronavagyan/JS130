@@ -80,4 +80,66 @@ describe("TodoList", () => {
     expect(todo3.isDone()).toBe(true);
     expect(() => list.markUndoneAt(3)).toThrow(ReferenceError);
   });
+
+  test("markAllDone() marks all todos as done", () => {
+    list.markAllDone();
+    expect(list.isDone()).toBe(true);
+  });
+
+  test("removeAt() removes todo at given index", () => {
+    expect(() => list.removeAt(3)).toThrow(ReferenceError);
+    let todo = list.removeAt(0);
+    expect(todo).toEqual([todo1]);
+    expect(list.toArray()).toEqual([todo2, todo3]);
+  });
+
+  //prettier-ignore
+
+  test('toString() returns string representation of the list', () => {
+    let string = `---- Today's Todos ----
+[ ] Buy milk
+[ ] Clean room
+[ ] Go to the gym`;
+  
+    expect(list.toString()).toBe(string);
+  });
+
+  test("toString() returns string representation of the list", () => {
+    list.markDoneAt(2);
+    let string = `---- Today's Todos ----
+[ ] Buy milk
+[ ] Clean room
+[X] Go to the gym`;
+
+    expect(list.toString()).toBe(string);
+  });
+
+  test("toString() returns string representation of the list", () => {
+    list.markAllDone();
+    let string = `---- Today's Todos ----
+[X] Buy milk
+[X] Clean room
+[X] Go to the gym`;
+
+    expect(list.toString()).toBe(string);
+  });
+
+  test("forEach() iterates over all todos", () => {
+    let titles = "";
+    list.forEach((todo) => (titles += todo.getTitle() + "."));
+    expect(titles).toBe("Buy milk.Clean room.Go to the gym.");
+  });
+
+  test("filter() returns a new TodoList with filtered todos", () => {
+    expect(list.filter(() => true)).toEqual(list);
+
+    todo1.markDone();
+    let newList = new TodoList(list.title);
+    newList.add(todo1);
+
+    expect(newList.title).toBe(list.title);
+
+    let doneItems = list.filter((todo) => todo.isDone());
+    expect(doneItems.toString()).toBe(newList.toString());
+  });
 });
