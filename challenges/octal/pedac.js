@@ -27,7 +27,7 @@
 
 // D
 
-// input: nubmer
+// input: number
 // output: number
 
 // A
