@@ -570,3 +570,100 @@ describe("The Car class", () => { // Grouping of tests
 ```
 
 Skipping Tests: replace `test` with `xtest`
+
+### expect and matchers
+
+![Matchers](matchers.png)
+
+## SEAT Approach
+
+<li>
+Set up the necessary objects.
+Execute the code against the object we're testing.
+Assert the results of execution.
+Tear down and clean up any lingering artifacts.
+</li>
+
+## Packaging
+
+### Project
+
+A collection of files used to develop, test, build, and distribute software. Software includes executable program, library module, or a combination of both. The project includes the source code, tests, assets, databases, config files, and more.
+
+### Setting up a Project
+
+1. Initialize repository (locally or remotely)
+2. npm init (create package.json)
+3. .gitignore (`echo node_modules >> .gitignore`)
+4. Folders
+   a. test => contains all tests
+   b. lib => code files
+   c. node_modules => created when downloading dependencies
+
+### npm and npx
+
+npm : Used to install a package intended to be `require`'d by your project
+npx : Executable CLI tool used with project (i.e. Eslint)
+
+## package.json and package-lock.json
+
+### `package.json`
+
+A configuration file used to manage dependencies along with other ease-of-use features.
+
+`npm init` => Establishes a package.json which:
+
+<li>
+Stores dependencies and versioning preferences for a project
+Allows projects to be transmitted more efficiently
+Allows someone to install dependencies automatically with `npm install`
+Stores scripts which can automate certain CLI commands
+</li>
+
+### `package-lock.json`
+
+File which shows the precise versions of packages which were installed upon `npm install` or `npm i -S pkg`
+
+### Installing
+
+1. Install/uninstall globally: `npm i -g pkg` | `npm r -g pkg`
+<li>
+Installs in path for access by all directories
+Recommended for CLI Executables (i.e. heroku) and other non-project related CLI tools.
+Not recommended for project files since the environment cannot be easily cloned (ie versioning, dependencies)
+</li>
+
+2. Install/uninstall: `npm i pkg` | `npm r pkg`
+<li>
+Fine for trying out packages
+Does not save any dependency or versioning data
+</li>
+
+3. Install/Uninstall as Dependency: `npm i -S pkg` | `npm r -S pkg`
+<li> Must have package.json </li>
+
+4. Install/Uninstall as Dependency: `npm i -D pkg` | `npm r -D pkg`
+<li> `npm prune` removes dependencies which were removed from package.json and no longer needed in node_modules </li>
+
+### Requiring specific parts of a library
+
+```JavaScript
+// This imports the entire lodash package
+// Con: System memory needs to remember entire package
+// Con: Processing lags due to loading entire package
+const _ = require("lodash");
+
+// This option only pulls from the 'chunk' file
+// Pro: Processing Effiency
+// Pro: Memory Efficiency
+// Con: Only works for independent files (no `require` within referenced file)
+const chunk = require("lodash/chunk");
+
+// This option loads the package, but only saves 'chunk`.
+// Pro: Memory Efficiency
+// Pro: Works with interdependent package files
+// Con: Processing lags due to loading entire package before extracting 'chunk'
+const chunk = require("lodash").chunk;
+```
+
+## Transpilation
