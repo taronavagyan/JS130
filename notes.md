@@ -286,4 +286,287 @@ let [ first, second, third ] = foo;
 
 Use of `...arr` to separate array or object properties into separate items.
 
-### Application 1: Pass
+### Application 1: Pass Array Elements as Arguments
+
+```JavaScript
+let arr = [1, 2, 3];
+function logNums(n1, n2, n3) {
+  console.log(n1);
+  console.log(n2);
+  console.log(n3);
+}
+
+logNums(...arr); // logs 1 2 3
+```
+
+### Application 2: Clone & Concatenate Arrays and Objects
+
+Array:
+
+```JavaScript
+let arr = [1, 2, 3];
+let arrClone = [...arr]; // => [1, 2, 3]
+console.log(arr === arrClone); // => false
+
+let combinedArr = [...arr, ...arrClone]; // => [1, 2, 3, 1, 2, 3]
+```
+
+Object:
+
+```JavaScript
+let obj = {
+  prop1: 1,
+  prop2: 2,
+};
+
+let otherObj = {
+  prop3: 3,
+  prop4: 4,
+};
+
+let objClone = {...obj}; // => { prop1: 1, prop2: 2 }
+console.log(obj = objClone); // => false
+
+let combinedObj = {...obj, ...otherObj}; // => { prop1: 1, prop2: 2, prop3: 3, prop4: 4 }
+```
+
+### Rest Operator
+
+Takes remaining elements of an array or object and stores them in a new array/object. Good for arrays or objects of undetermined length.
+
+```JavaScript
+function maxItem(first, ...moreArgs) {
+  let maximum = first;
+  moreArgs.forEach(value => {
+    if (value > maximum) {
+      maximum = value;
+    }
+  });
+
+  return maximum;
+}
+
+console.log(maxItem(2, 6, 10, 4, -3)); // logs 10
+```
+
+## Modules (CommonJS)
+
+1. CommonJS/Node Modules
+
+<li>
+Synchronous: Not compatible with browser
+Originally included in Node
+<li>
+
+2. JS (ES/ECMAScript) Modules
+
+<li> Used in Browser </li>
+
+### CommonJS Modules
+
+In order to share variables across files, you must export using `module.exports` for each export, then use `require('./path')` to import.
+
+```JavaScript
+// in logit.js
+
+function logIt(string) {
+  console.log(string);
+}
+
+module.exports = logIt;
+```
+
+```JavaScript
+// in main.js
+let logIt = require("./logit");
+logIt("Works!"); // logs Works!
+```
+
+### Path References
+
+1. NPM Module: use package name in quotes as path
+2. Local File System: use './' in path to indicate relative path
+
+### Destructuring with modules
+
+```JavaScript
+// in logit.js
+
+let prefix = ">> ";
+
+function logIt(string) {
+  console.log(`${prefix}${string}`);
+}
+
+function setPrefix(newPrefix) {
+  prefix = newPrefix;
+}
+
+module.exports = {
+  logIt,
+  setPrefix,
+};
+```
+
+```JavaScript
+// in main.js
+
+const { logIt, setPrefix } = require("./logIt");
+logIt("You rock!"); // logs >> You rock!
+setPrefix("++ ");
+logIt("You rock!"); // logs ++ You rock!
+```
+
+## Exceptions
+
+Throw an Error/Raise an Exception
+Exception Handler: `try/catch` statements, where the `try` block runs the code and the `catch` block does something in case of an error. `Error` is a type from which `ReferenceError`, `TypeError`, and `SyntaxError` inherit.
+
+### Throwing an Error
+
+There are a few ways the `throw` keyword can assist in stopping the program.
+
+### `throw`
+
+By itself, `throw` merely stops the program immediately and prints the location of the `throw` statement.
+
+```JavaScript
+let arr = [1, 2, 3];
+arr.forEach(elem => {
+  if (elem === 2) {
+    throw "Illegal Number: 2";
+  }
+
+  console.log(elem);
+});
+
+// Output
+// 1
+
+// /home/ec2-user/environment/js139/practice/throw.js:5
+//     throw "Illegal Number: 2";
+//     ^
+// Illegal Number: 2
+// (Use `node --trace-uncaught ...` to show where the exception was thrown)
+```
+
+### `throw new Error("ErrorType")`
+
+Full Stack Trace is pulled in and description is given for the error.
+
+```JavaScript
+let arr = [1, 2, 3];
+
+arr.forEach(elem => {
+  if (elem === 2) {
+    throw new Error("Illegal Number: 2");
+  }
+
+  console.log(elem);
+});
+
+// Output
+// 1
+// /home/ec2-user/environment/js139/practice/throw.js:5
+//     throw new Error("Illegal Number: 2");
+//     ^
+
+// Error: Illegal Number: 2
+//     at /home/ec2-user/environment/js139/practice/throw.js:5:11
+//     at Array.forEach (<anonymous>)
+//     at Object.<anonymous> (/home/ec2-user/environment/js139/practice/throw.js:3:5)
+//     at Module._compile (node:internal/modules/cjs/loader:1092:14)
+//     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1121:10)
+//     at Module.load (node:internal/modules/cjs/loader:972:32)
+//     at Function.Module._load (node:internal/modules/cjs/loader:813:14)
+//     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
+//     at node:internal/main/run_main_module:17:47
+```
+
+### Custom Error Types
+
+```JavaScript
+class MyCustomError extends Error {}
+
+if (true) {
+  throw new MyCustomError("Specific Situation");
+}
+```
+
+### `try/catch` statements
+
+A `try` block contains code which may throw an error, and the `catch` block allows alternative code to run in the case of an error.
+
+## Pure functions and side effects
+
+### Side effects
+
+A function is said to have a side effect if it does any of the following:
+
+1. Reassigns any non-local variable or object which references a non-local variable.
+
+<li> 
+Reassignment of a varible in outer scope.
+Mutation of an object/array/class which is in outer scope or passed in as an argument.
+</li>
+
+2. Reads from or writes to any data entity that is non-local to its program.
+
+<li>
+Reading from or writing to another file, database, or webpage.
+Reading keyboard input.
+Writing to the console/ Updating display.
+Accessing hardware features (input devices, clock/calendar, camera, audio, `Math.random()`)
+</li>
+
+3. Raises an exception, if it both...
+<li>
+Does not catch and handle the exception or...
+Has side effects in the catch block
+</li>
+
+4. Calls another function that has any side effects that are not confined to the current function.
+
+### Pure function
+
+A function that:
+
+1. Has no side effects.
+2. Will always return the same value given the same set of arguments.
+
+## Testing with Jest
+
+### Why Write Tests?
+
+The main reason to write tests for your programs is to prevent **regression**, or to make sure that previously working code does not stop working after a change to your code or environment.
+
+### Testing Terminology
+
+**Test Suite**
+The entire set of tests for a project/program/application.
+
+**Test (Specs)**
+Testing for a specific situation. Consists of one or more assertions.
+
+**Assertion (Expectation)**
+Verification step that confirms the program did what it should.
+
+### Writing tests
+
+1. Export the code you want to test using `module.exports`
+2. Require the file to be tested in your `jest` test file
+   The test file for `file.js` should be named `file.test.js`
+3. Create tests to run for `file.test.js`
+
+```JavaScript
+const Car = require("./file");
+
+describe("The Car class", () => { // Grouping of tests
+  test("has four wheels", () => { // Test
+    let car = new Car();
+    expect(car.wheels).toBe(4);   // Assertion (expect) & Matcher (toBe)
+  });
+});
+```
+
+Skipping Tests: replace `test` with `xtest`
