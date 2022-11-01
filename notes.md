@@ -667,3 +667,80 @@ const chunk = require("lodash").chunk;
 ```
 
 ## Transpilation
+
+The process of converting source code into another version or language.
+
+### Babel
+
+Most widely used tool for ES6 => ES5 transpilation.
+
+To use Babel:
+
+1. Configure Babel to run automatically.
+2. Install in Command Line (locally)
+<li>
+Install: `npm i -D @babel/core @babel/cli`
+Transpile: `npx babel lib --out-dir dist`
+
+This command transpiles all files in lib and puts them in a directory, `dist`.
+
+</li>
+<li>
+Install Presets/configure Babel
+Example: ES5 Preset `env`
+<ol>
+Install preset => `npm install --save-dev @babel/preset-env`
+
+Run command with preset => `npx babel lib --out-dir dist --presets=@babel/preset-env`
+
+</ol>
+</li>
+
+### npm scripts
+
+In `package.json`, key/value pairs contained in `"scripts": {}` become aliases (keys) for commands (values). To use an alias, use `npm run` followed by the script name.
+
+## Asynchronous Programming
+
+Asynchronous functions do not block execution for the rest of the program. Asynchronous code does not run when the runtime encounters it, but rather run concurrently with other operations so that the caller doesn't have to wait for the task to finish running.
+
+### `setTimeout`
+
+Accepts a callback function and the time to delay execution in milliseconds. JavaScript will not run `setTimeout` until the entire program is finished, even if the delay is 0.
+
+### `setInterval`
+
+Accepts a callback function and a period of time, in milliseconds, to delay between invocations.
+
+```JavaScript
+function save() {
+  // Send the form values to the server for safekeeping
+}
+
+// Call save() every 10 seconds
+var id = setInterval(save, 1000);
+
+// Later, perhaps after the user submits the form
+clearInterval(id);
+```
+
+### Promises
+
+A promise is a class which has three potential states: pending, fulfilled, or rejected.
+
+```JavaScript
+let p = new Promise((resolve, reject) => { // promise takes a callback as an argument
+  let a = 1 + 1;
+  if (a === 2) { // condition for success
+    resolve("Success!");
+  } else {
+    reject("Failed.");
+  }
+});
+
+p.then((message) => { // then is activated upon fulfillment and may be chained
+  console.log(`This is in the then ${message}`);
+}).catch((message) => { // catch activated upon rejection. Handles errors or restarts process
+  console.log(`This is in the catch${message}`);
+});
+```

@@ -17,7 +17,10 @@
 //   }
 // );
 
-setTimeout(() => console.log("1s"), 1000);
-setTimeout(() => console.log("1s"), 1000);
-setTimeout(() => console.log("1s"), 1000);
-setTimeout(() => console.log("1s"), 1000);
+bar(); // logs "world"
+
+function bar() {
+  console.log("world");
+}
+
+var bar = "hello";
