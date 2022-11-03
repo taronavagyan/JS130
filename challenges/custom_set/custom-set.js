@@ -4,7 +4,6 @@ class CustomSet {
   }
 
   isEmpty() {
-    console.log(this.set);
     return this.length() === 0;
   }
 
