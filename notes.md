@@ -559,12 +559,21 @@ Verification step that confirms the program did what it should.
 3. Create tests to run for `file.test.js`
 
 ```JavaScript
-const Car = require("./file");
+const Car = require('./car');
 
-describe("The Car class", () => { // Grouping of tests
-  test("has four wheels", () => { // Test
-    let car = new Car();
-    expect(car.wheels).toBe(4);   // Assertion (expect) & Matcher (toBe)
+describe('The Car class', () => {
+  let car;
+  beforeEach(() => {
+    car = new Car();
+  });
+
+  test('has four wheels', () => {
+    expect(car.wheels).toBe(4);
+  });
+
+  test('two newly created cars are object equal', () => {
+    let car2 = new Car();
+    expect(car).toEqual(car2);
   });
 });
 ```
