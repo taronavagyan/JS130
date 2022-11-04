@@ -1,24 +1,16 @@
-try {
-  foo();
-} catch (error) {
-  // error caught
-  console.log("That's all, folks!"); // logged
-}
+let foo = 1;
 
-console.log("End program"); //logged
-
-function foo() {
-  // hoisted
-  try {
-    doThis(); // not defined, ReferenceError thrown, skipped to catch block
-    console.log("tried to run doThis");
-  } catch (error) {
-    if (error instanceof ReferenceError) {
-      // truthy
-      console.log("Got a ReferenceError exception"); // logged
-      doThis(); // error, see line 3
-    }
+function bar() {
+  if (foo === 1) {
+    foo = 2; // you can change this line
+  } else if (foo === 2) {
+    let foo = 3; // you can change this line
+  } else {
+    foo = 4; // you can change this line
   }
-
-  console.log("Done with foo()");
 }
+
+bar();
+bar();
+bar();
+console.log(foo); // 2
