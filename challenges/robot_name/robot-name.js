@@ -1,31 +1,41 @@
-class Robot {
-  static robotNamesRecord = [];
+"use strict";
 
+const CHARS = "ZXCVBNMASDFGHJKLQWERTYUIOP";
+const NUMS = "1234567890";
+
+class Robot {
+  static NAME_RECORD = [];
   constructor() {
-    let generatedName = this.name();
-    while (Robot.robotNamesRecord.includes(generatedName)) {
-      generatedName = this.name();
+    let generatedName = this._genName();
+    while (Robot.NAME_RECORD.includes(generatedName)) {
+      generatedName = this._genName();
     }
     this.roboName = generatedName;
-    Robot.robotNamesRecord.push(generatedName);
+    Robot.NAME_RECORD.push(generatedName);
   }
 
-  name() {
-    if (this.roboName) return this.roboName;
-    const LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNM";
-    const NUMBERS = "1234567890";
+  _genName() {
     let name = "";
-    for (let idx = 0; idx < 2; idx += 1) {
-      name += LETTERS[Math.floor(Math.random() * LETTERS.length)];
-    }
-    for (let number = 0; number < 3; number += 1) {
-      name += NUMBERS[Math.floor(Math.random() * NUMBERS.length)];
+    while (name.length < 5) {
+      if (name.length < 2) {
+        name += CHARS[Math.floor(Math.random() * CHARS.length)];
+      } else {
+        name += Number(NUMS[Math.floor(Math.random() * NUMS.length)]);
+      }
     }
     return name;
   }
 
+  name() {
+    return this.roboName;
+  }
+
   reset() {
-    this.roboName = null;
+    let newName = this._genName();
+    while (Robot.NAME_RECORD.includes(newName)) {
+      newName = this._genName();
+    }
+    this.roboName = newName;
   }
 }
 
